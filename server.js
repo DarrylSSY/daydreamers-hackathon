@@ -1,13 +1,16 @@
 var express = require("express");
 var app = express();
 const bcrypt = require('bcrypt');
+const port = process.env.PORT || 2000;
+const secret = process.env.SECRET || 'shhhhh11111';
 var jwt = require('jsonwebtoken');
 var cors = require('cors');
+require("dotenv").config()
 var multer = require('multer'),
   bodyParser = require('body-parser'),
   path = require('path');
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/daydreamers");
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 var fs = require('fs');
 var user = require("./model/user.js");
 app.use(cors());
@@ -23,7 +26,7 @@ app.use("/", (req, res, next) => {
       next();
     } else {
       /* decode jwt token if authorized*/
-      jwt.verify(req.headers.token, 'shhhhh11111', function (err, decoded) {
+      jwt.verify(req.headers.token, secret, function (err, decoded) {
         if (decoded && decoded.user) {
           req.user = decoded;
           next();
@@ -188,7 +191,7 @@ app.post("/complete-questionnaire", (req, res) => {
   }
 })
 function checkUserAndGenerateToken(data, req, res) {
-  jwt.sign({ user: data.username, id: data._id }, 'shhhhh11111', { expiresIn: '1d' }, (err, token) => {
+  jwt.sign({ user: data.username, id: data._id }, secret, { expiresIn: '1d' }, (err, token) => {
     if (err) {
       res.status(400).json({
         status: false,
@@ -211,6 +214,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 })
 
-app.listen(2000, () => {
+app.listen(port, () => {
   console.log("Server is running On port 2000");
 });
