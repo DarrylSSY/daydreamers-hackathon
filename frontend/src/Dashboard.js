@@ -38,9 +38,9 @@ export default class Dashboard extends Component {
     let data = '?';
     data = `${data}`;
     axios.get(`http://localhost:2000/get-user`, {
-      username: this.state.username,
       headers: {
-        'token': this.state.token
+        'token': this.state.token,
+        'username': localStorage.getItem('user_id'),
       }
 
     }).then((res) => {

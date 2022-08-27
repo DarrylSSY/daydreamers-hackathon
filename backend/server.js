@@ -91,10 +91,10 @@ app.post("/login", (req, res) => {
 
 app.get("/get-user", (req, res) => {
   try {
-    user.find({username: 85339904}, (err, data) => {
+    user.find({username: req.headers.username}, (err, data) => {
       res.status(200).json({
         status: true,
-        title: 'User retrieved.',
+        title: "Retrieved user",
         userdata: data,
       })
     })
