@@ -1,13 +1,18 @@
 # Risk-it or Lose-it Application
 This is a MERN stack project created as our submission for Ellipsis Tech Series 2022 Hackathon
+
 This project is a fork of [FSojitra's CRUD App](https://github.com/FSojitra/Registration-Login-and-CRUD-Action-using-MERN-stack)
 
+This project utilises API from [SingStat](https://tablebuilder.singstat.gov.sg/table/TS/M015631#!)
+
+This project uses [CPF Questionnaire on Risk Tolerance](https://www.cpf.gov.sg/content/dam/web/member/growing-your-savings/documents/Risk_Tolerance_Questionaire.pdf)
 ### Prerequisites
 Below noted things you need to install to run this project in your system
 
 - Node.js
 - NPM
 - MongoDB
+- ExpressJS
 
 ### To Setup
 Clone or download this repository
