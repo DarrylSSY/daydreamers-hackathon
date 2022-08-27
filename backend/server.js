@@ -10,29 +10,6 @@ var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/productDB");
 var fs = require('fs');
 var user = require("./model/user.js");
-
-var dir = './uploads';
-var upload = multer({
-  storage: multer.diskStorage({
-
-    destination: function (req, file, callback) {
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-      }
-      callback(null, './uploads');
-    },
-    filename: function (req, file, callback) { callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); }
-
-  }),
-
-  fileFilter: function (req, file, callback) {
-    var ext = path.extname(file.originalname)
-    if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
-      return callback(/*res.end('Only images are allowed')*/ null, false)
-    }
-    callback(null, true)
-  }
-});
 app.use(cors());
 app.use(express.static('uploads'));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
@@ -42,7 +19,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.use("/", (req, res, next) => {
   try {
-    if (req.path == "/login" || req.path == "/register" || req.path == "/") {
+    if (req.path == "/get-user" || req.path == "/login" || req.path == "/register" || req.path == "/" || req.path == "/complete-questionnaire") {
       next();
     } else {
       /* decode jwt token if authorized*/
@@ -112,6 +89,23 @@ app.post("/login", (req, res) => {
 
 });
 
+app.get("/get-user", (req, res) => {
+  try {
+    user.find({username: 85339904}, (err, data) => {
+      res.status(200).json({
+        status: true,
+        title: 'User retrieved.',
+        userdata: data,
+      })
+    })
+  } catch (e) {
+    res.status(400).json({
+      errorMessage: 'Something went wrong!',
+      status: false
+    });
+  }
+})
+
 /* register api */
 app.post("/register", (req, res) => {
   try {
@@ -170,26 +164,16 @@ app.post("/register", (req, res) => {
 
 app.post("/complete-questionnaire", (req, res) => {
   try{
-    if (req.username, req.questionnaireScore) {
-      user.findById({ username: req.body.username }, (err, new_user) => {
-        if (req.questionnaireScore) {
-          new_user.questionnaireScore = req.questionnaireScore;
-        }
-        new_user.completedQuestionnaire = true;
-        new_user.save((err, data) => {
-          if (err) {
-            res.status(400).json({
-              errorMessage: err,
-              status: false
-            });
-          } else {
-            res.status(200).json({
-              status: true,
-              title: 'User updated.'
-            });
-          }
-        });
-      });
+    if (req.body.username, req.body.questionnaireScore) {
+      const filter = {
+        username: req.body.username
+      }
+      const newProfile = {
+        questionnaireScore: req.body.questionnaireScore,
+        completedQuestionnaire: true
+      }
+      user.findOneAndUpdate(filter, newProfile, {new: true, useFindAndModify: false})
+          .then(() => res.sendStatus(200))
     } else {
       res.status(400).json({
         errorMessage: 'Add proper parameter first!',
@@ -211,10 +195,13 @@ function checkUserAndGenerateToken(data, req, res) {
         errorMessage: err,
       });
     } else {
-      res.json({
-        message: 'Login Successfully.',
-        token: token,
-        status: true
+      user.find({username: data.username}, (err, userdata) => {
+        res.json({
+          message: 'Login Successfully.',
+          token: token,
+          completedQuestionnaire: userdata[0].completedQuestionnaire,
+          status: true
+        });
       });
     }
   });
