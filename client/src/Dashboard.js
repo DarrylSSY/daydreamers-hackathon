@@ -66,34 +66,34 @@ export default class Dashboard extends Component {
             economyScore = 0;
         }
         else if (GDPChange < -60){
-            economyScore = 1;
-        }
-        else if (GDPChange < -40){
             economyScore = 2;
         }
-        else if (GDPChange < -20){
-            economyScore = 3;
-        }
-        else if (GDPChange < -9){
+        else if (GDPChange < -40){
             economyScore = 4;
         }
-        else if (GDPChange < 10){
-            economyScore = 5;
-        }
-        else if (GDPChange < 21){
+        else if (GDPChange < -20){
             economyScore = 6;
         }
-        else if (GDPChange < 41){
-            economyScore = 7;
-        }
-        else if (GDPChange < 61){
+        else if (GDPChange < -9){
             economyScore = 8;
         }
+        else if (GDPChange < 10){
+            economyScore = 10;
+        }
+        else if (GDPChange < 21){
+            economyScore = 12;
+        }
+        else if (GDPChange < 41){
+            economyScore = 14;
+        }
+        else if (GDPChange < 61){
+            economyScore = 16;
+        }
         else if (GDPChange < 81){
-            economyScore = 9;
+            economyScore = 18;
         }
         else{
-            economyScore = 10;
+            economyScore = 20;
         }
         this.setState({economyScore: economyScore})
 
@@ -171,7 +171,7 @@ export default class Dashboard extends Component {
           Questionnaire Score: {this.state.questionnaireScore*2}/20 <br/>
           Wealth Score: {this.state.wealth*5}/25 <br/>
           Duration Score: {this.getMonthDifference(new Date(this.state.registrationDate), new Date())}/10 <br/>
-          Economy Score : {this.state.economyScore}/10<br/>
+          Economy Score : {this.state.economyScore}/20<br/>
             <h1>{this.getOverallRisk()}</h1>
           <Button
             className="button_style"
