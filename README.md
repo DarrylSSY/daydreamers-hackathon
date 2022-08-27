@@ -1,6 +1,6 @@
-# MERN Stack | Login, Register and CRUD app
+# Risk-it or Lose-it Application
 This is a MERN stack project created as our submission for Ellipsis Tech Series 2022 Hackathon
-This project is a fork of [FSojitra's CRUD App](https://github.com/FSojitra/Registration-Login-and-CRUD-Action-using-MERN-stack/blob/development/MERN.gif)
+This project is a fork of [FSojitra's CRUD App](https://github.com/FSojitra/Registration-Login-and-CRUD-Action-using-MERN-stack)
 
 ### Prerequisites
 Below noted things you need to install to run this project in your system
