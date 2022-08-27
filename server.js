@@ -7,11 +7,11 @@ var multer = require('multer'),
   bodyParser = require('body-parser'),
   path = require('path');
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/productDB");
+mongoose.connect("mongodb://localhost/daydreamers");
 var fs = require('fs');
 var user = require("./model/user.js");
 app.use(cors());
-app.use(express.static('uploads'));
+app.use(express.static(path.join(__dirname, "client", "build")));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: false
@@ -207,7 +207,10 @@ function checkUserAndGenerateToken(data, req, res) {
   });
 }
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+})
 
 app.listen(2000, () => {
-  console.log("Server is Runing On port 2000");
+  console.log("Server is running On port 2000");
 });

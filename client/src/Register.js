@@ -101,7 +101,7 @@ export default class Register extends React.Component {
           </FormControl>
           <br /><br />
           <FormControl variant="standard" style={{minWidth: 182, textAlign: "left"}}>
-            <InputLabel id="select-basic" >Annual income</InputLabel>
+            <InputLabel id="select-basic" >Monthly income</InputLabel>
             <Select
               id="select-basic"
               type="income"
