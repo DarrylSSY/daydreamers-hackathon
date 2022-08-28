@@ -8,7 +8,7 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import Questionnaire from './Questionnaire';
 import './Login.css';
-import './piechart.css';
+import './Dashboard.css';
 
 ReactDOM.render(
     <BrowserRouter>

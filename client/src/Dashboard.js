@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Button, TextField, Dialog, DialogActions, LinearProgress,
-  DialogTitle, DialogContent, TableBody, Table,
-  TableContainer, TableHead, TableRow, TableCell
+    Button, TextField, Dialog, DialogActions, LinearProgress,
+    DialogTitle, DialogContent, TableBody, Table,
+    TableContainer, TableHead, TableRow, TableCell, Grid
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import swal from 'sweetalert';
@@ -37,21 +37,23 @@ export default class Dashboard extends Component {
 
       let riskPercent = (this.state.income*5+this.state.questionnaireScore*2+this.state.wealth*5+this.getMonthDifference(new Date(this.state.registrationDate), new Date())+this.state.economyScore)
       console.log(riskPercent)
+      let result = "";
       if (riskPercent > 79){
-          return "You have a high tolerance for risk"
+          result = "You have a high tolerance for risk";
       }
       if (riskPercent > 59){
-          return "You have a moderately high tolerance for risk"
+          result = "You have a moderately high tolerance for risk";
       }
       if (riskPercent > 39){
-          return "You have a moderate tolerance for risk"
+          result = "You have a moderate tolerance for risk";
       }
       if (riskPercent > 19){
-          return "You have a moderately low tolerance for risk"
+          result = "You have a moderately low tolerance for risk";
       }
       else{
-          return "You have a low tolerance for risk"
+          result = "You have a low tolerance for risk";
       }
+      return [result, riskPercent];
   }
 
   calculateEconomyScore = () => {
@@ -169,16 +171,17 @@ export default class Dashboard extends Component {
           <h2>Dashboard</h2>
           Welcome back!
           
-          <div class="grid-container">
-            <div class="grid-child">
-              <table>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item xs={12}>
+              <table width="100%">
                 <tr>
                   <th>Income Score:</th>
+
                   <th>Questionnaire Score:</th>
                 </tr>
                 <tr>
                   <td>
-                    <p class="score">{this.state.income*5}</p>
+                    <p  class="score">{this.state.income*5}</p>
                     /25
                   </td>
                   <td>
@@ -186,6 +189,15 @@ export default class Dashboard extends Component {
                     /20 
                   </td>
                  </tr>
+                  <tr width="100%" >
+                      <td colSpan={2}>
+                          <div className="pie animate no-round" style={{
+                              "--p": this.getOverallRisk()[1],
+                              "--c": "#3f51b5",
+                              margin: "auto"
+                          }}> {this.getOverallRisk()[1]}%
+                          </div></td>
+                  </tr>
                  <tr>
                     <th>Wealth Score:</th>
                     <th>Duration Score:</th>
@@ -210,12 +222,10 @@ export default class Dashboard extends Component {
                   </td>
                 </tr>
                </table>
-            </div>
+            </Grid>
  
-            <div class="grid-child">
-              <h2>{this.getOverallRisk()}</h2>
-              <div class="pie animate no-round" style={{"--p":80, "--c":"orange", margin: "auto"}}> 80%</div>
-            </div>
+
+            </Grid>
           </div>
           <br />
           <Button
@@ -227,7 +237,6 @@ export default class Dashboard extends Component {
             Log Out
           </Button>
         </div>
-      </div>
     );
   }
 }
