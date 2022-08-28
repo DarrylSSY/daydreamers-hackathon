@@ -212,9 +212,9 @@ export default class Dashboard extends Component {
                </table>
             </div>
  
-            <div class="grid-child>
+            <div class="grid-child">
               <h2>{this.getOverallRisk()}</h2>
-              <div class="pie animate no-round" style="--p:80;--c:orange; margin: auto;"> 80%</div>
+              <div class="pie animate no-round" style={{"--p":80, "--c":"orange", margin: "auto"}}> 80%</div>
             </div>
           </div>
           <br />
