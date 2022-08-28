@@ -129,12 +129,13 @@ export default class Register extends React.Component {
           >
             Register
           </Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-          <div style="tet-align: center;">
-              If you have an account, 
+        <br/><br/>
+          <div style={{textAlign: "center"}}>
+              If you have an account,&nbsp;
           <Link href="/">
-            Login here
+            login here
           </Link>
+          </div>
         </div>
       </div>
     );
