@@ -1,3 +1,21 @@
+.grid-container {
+  display: grid;
+  column-gap: 50px;
+  width: 80%;
+  margin: auto;
+}
+
+.grid-child {
+  border: 1px solid black;
+  background-colour: #dde5f0;
+}
+
+.score {
+  font-size: 20pt;
+  display: inline;
+  color: #3f51b5;
+}
+
 @property --p{
   syntax: '<number>';
   inherits: true;
