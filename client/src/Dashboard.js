@@ -167,12 +167,57 @@ export default class Dashboard extends Component {
         {this.state.loading && <LinearProgress size={40} />}
         <div>
           <h2>Dashboard</h2>
-          Income Score: {this.state.income*5}/25 <br/>
-          Questionnaire Score: {this.state.questionnaireScore*2}/20 <br/>
-          Wealth Score: {this.state.wealth*5}/25 <br/>
-          Duration Score: {this.getMonthDifference(new Date(this.state.registrationDate), new Date())}/10 <br/>
-          Economy Score : {this.state.economyScore}/20<br/>
-            <h1>{this.getOverallRisk()}</h1>
+          Welcome back!
+          
+          <div class="grid-container">
+            <div class="grid-child">
+              <table>
+                <tr>
+                  <th>Income Score:</th>
+                  <th>Questionnaire Score:</th>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="score">{this.state.income*5}</p>
+                    /25
+                  </td>
+                  <td>
+                    <p class="score">{this.state.questionnaireScore*2}</p>
+                    /20 
+                  </td>
+                 </tr>
+                 <tr>
+                    <th>Wealth Score:</th>
+                    <th>Duration Score:</th>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="score">{this.state.wealth*5}</p>
+                    /25
+                  </td>
+                  <td>
+                    <p class="score">{this.getMonthDifference(new Date(this.state.registrationDate), new Date())}</p>
+                    /10
+                  </td>
+                </tr>
+                <tr>
+                  <th colspan="2">Economy Score:</th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <p class="score">{this.state.economyScore}</p>
+                    /20
+                  </td>
+                </tr>
+               </table>
+            </div>
+ 
+            <div class="grid-child>
+              <h2>{this.getOverallRisk()}</h2>
+              <div class="pie animate no-round" style="--p:80;--c:orange; margin: auto;"> 80%</div>
+            </div>
+          </div>
+          <br />
           <Button
             className="button_style"
             variant="contained"
