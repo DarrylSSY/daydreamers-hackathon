@@ -1,8 +1,11 @@
 # Risk-it or Lose-it Application
 This is a MERN stack project created as our submission for Ellipsis Tech Series 2022 Hackathon
 
-Pitch Deck: https://docs.google.com/presentation/d/1qmONsCX82iJ0vrQ27hgDl8CVVRvND5tm8zwlKYG1E74/edit?usp=sharing
-Video: https://www.youtube.com/watch?v=krJVIkDdmVU
+**Pitch Deck:** https://docs.google.com/presentation/d/1qmONsCX82iJ0vrQ27hgDl8CVVRvND5tm8zwlKYG1E74/edit?usp=sharing
+
+**Video:** https://www.youtube.com/watch?v=krJVIkDdmVU
+
+**Deployment:** https://risk-it-or-lose-it.herokuapp.com/
 
 This project is a fork of [FSojitra's CRUD App](https://github.com/FSojitra/Registration-Login-and-CRUD-Action-using-MERN-stack)
 
