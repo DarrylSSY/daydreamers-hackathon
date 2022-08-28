@@ -37,21 +37,23 @@ export default class Dashboard extends Component {
 
       let riskPercent = (this.state.income*5+this.state.questionnaireScore*2+this.state.wealth*5+this.getMonthDifference(new Date(this.state.registrationDate), new Date())+this.state.economyScore)
       console.log(riskPercent)
+      let result = "";
       if (riskPercent > 79){
-          return "You have a high tolerance for risk"
+          result = "You have a high tolerance for risk";
       }
       if (riskPercent > 59){
-          return "You have a moderately high tolerance for risk"
+          result = "You have a moderately high tolerance for risk";
       }
       if (riskPercent > 39){
-          return "You have a moderate tolerance for risk"
+          result = "You have a moderate tolerance for risk";
       }
       if (riskPercent > 19){
-          return "You have a moderately low tolerance for risk"
+          result = "You have a moderately low tolerance for risk";
       }
       else{
-          return "You have a low tolerance for risk"
+          result = "You have a low tolerance for risk";
       }
+      return [result, riskPercent];
   }
 
   calculateEconomyScore = () => {
@@ -213,8 +215,8 @@ export default class Dashboard extends Component {
             </div>
  
             <div class="grid-child>
-              <h2>{this.getOverallRisk()}</h2>
-              <div class="pie animate no-round" style="--p:80;--c:orange; margin: auto;"> 80%</div>
+              <h2>{this.getOverallRisk()[0]}</h2>
+              <div class="pie animate no-round" style="--p:{this.getOverallRisk()[1]};--c:#3f51b5; margin: auto;"> {this.getOverallRisk()[1]}%</div>
             </div>
           </div>
           <br />
